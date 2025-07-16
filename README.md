@@ -147,7 +147,7 @@ scoop install JetBrainsMono-NF
 ### One-Line Install (Recommended)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/nvimcraft ~/.config/nvim && nvim
+git clone https://github.com/IronDingo/nvimcraft ~/.config/nvim && nvim
 ```
 
 That's it! Neovim will automatically install all plugins on first launch.
@@ -161,7 +161,7 @@ That's it! Neovim will automatically install all plugins on first launch.
 
 2. **Clone NvimCraft**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/nvimcraft ~/.config/nvim
+   git clone https://github.com/IronDingo/nvimcraft ~/.config/nvim
    ```
 
 3. **Launch Neovim**:
@@ -268,8 +268,8 @@ nvim +":Lazy sync" +qa
 
 Found a bug or have a suggestion? Feel free to:
 
-- 🐛 [Open an issue](https://github.com/YOUR_USERNAME/nvimcraft/issues)
-- 🔧 [Submit a PR](https://github.com/YOUR_USERNAME/nvimcraft/pulls)
+- 🐛 [Open an issue](https://github.com/IronDingo/nvimcraft/issues)
+- 🔧 [Submit a PR](https://github.com/IronDingo/nvimcraft/pulls)
 - ⭐ Give it a star if you like it!
 
 ## 📚 Documentation
