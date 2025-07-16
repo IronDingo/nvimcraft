@@ -1,0 +1,27 @@
+# Lazy.nvim plugin directory
+lazy-lock.json
+
+# Local plugin specs
+.lazy.lua
+
+# Session files
+Session.vim
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Neovim runtime files
+.netrwhist
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local configuration overrides (if you want machine-specific settings)
+lua/config/local.lua
+
+# LSP log files
+lsp.log
+.luarc.json
