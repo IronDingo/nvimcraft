@@ -36,7 +36,7 @@ NvimCraft is a meticulously crafted Neovim configuration that transforms your te
 │  ├── 📊 database.sql      Built-in SQL client      │
 │  └── 🚀 .gitignore        Git integration          │
 │                                                     │
-│  Press <Space> to see the magic happen...           │
+│  Press <Leader> to see the magic happen...           │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -200,22 +200,22 @@ After installation, you should:
 | Key | Description |
 |-----|-------------|
 | `<Space>` | Leader key (your command center) |
-| `<Space><Space>` | Find files |
-| `<Space>fg` | Search in files (grep) |
-| `<Space>e` | File explorer |
+| `<Leader><Leader>` | Find files |
+| `<Leader>fg` | Search in files (grep) |
+| `<Leader>e` | File explorer |
 | `K` | Show documentation |
 | `gd` | Go to definition |
-| `<Space>ca` | Code actions |
+| `<Leader>ca` | Code actions |
 
-> 💡 Press `<Space>sk` to search all keybindings!
+> 💡 Press `<Leader>sk` to search all keybindings!
 
 ### First Steps
 
 1. **Open a project**: `nvim .` in your project directory
-2. **Find files**: Press `<Space><Space>`
-3. **Search text**: Press `<Space>fg`
+2. **Find files**: Press `<Leader><Leader>`
+3. **Search text**: Press `<Leader>fg`
 4. **Open terminal**: Press `<Ctrl>/`
-5. **Manage git**: Press `<Space>gg` for Lazygit
+5. **Manage git**: Press `<Leader>gg` for Lazygit
 
 ## 🛠️ Customization
 
