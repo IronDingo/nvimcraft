@@ -7,6 +7,14 @@ return {
     name = "catppuccin",
     priority = 1000,
   },
+
+
+  -- FIX: Ping nvim-treesitter to working version
+    {
+    "nvim-treesitter/nvim-treesitter",
+    commit = "f2778bd1a28b74adf5b1aa51aa57da85adfa3d16", -- This commit has the query_predicates module
+    build = ":TSUpdate",
+  },
   
   -- Add GitHub Copilot for AI assistance (optional - comment out if not needed)
   {
