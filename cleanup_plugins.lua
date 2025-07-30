@@ -5,31 +5,30 @@ local M = {}
 
 function M.cleanup_corrupted_plugins()
   local lazy_dir = vim.fn.stdpath("data") .. "/lazy"
-  local plugins_to_clean = {
-    "nvim-treesitter-textobjects",
-    "lualine.nvim", 
-    "bufferline.nvim",
-    "which-key.nvim",
-    "flash.nvim",
-    "noice.nvim",
-    "trouble.nvim",
-    "mason.nvim",
-    "nvim-treesitter"
-  }
+  local cache_dir = vim.fn.stdpath("cache") .. "/lazy"
   
-  print("🧹 Starting plugin cleanup...")
+  print("🧹 Starting aggressive plugin cleanup...")
   
-  for _, plugin in ipairs(plugins_to_clean) do
-    local plugin_path = lazy_dir .. "/" .. plugin
-    if vim.fn.isdirectory(plugin_path) == 1 then
-      print("🗑️  Removing corrupted plugin: " .. plugin)
-      vim.fn.delete(plugin_path, "rf")
-    else
-      print("ℹ️  Plugin not found: " .. plugin)
-    end
+  -- Remove the entire lazy directory to start fresh
+  if vim.fn.isdirectory(lazy_dir) == 1 then
+    print("🗑️  Removing entire lazy directory...")
+    vim.fn.delete(lazy_dir, "rf")
   end
   
-  print("✅ Cleanup complete! Restart Neovim to reinstall plugins.")
+  -- Clear the cache directory
+  if vim.fn.isdirectory(cache_dir) == 1 then
+    print("🗑️  Clearing lazy cache...")
+    vim.fn.delete(cache_dir, "rf")
+  end
+  
+  -- Remove treesitter cache specifically
+  local treesitter_cache = vim.fn.stdpath("cache") .. "/nvim-treesitter"
+  if vim.fn.isdirectory(treesitter_cache) == 1 then
+    print("🗑️  Clearing treesitter cache...")
+    vim.fn.delete(treesitter_cache, "rf")
+  end
+  
+  print("✅ Aggressive cleanup complete! Restart Neovim to reinstall plugins.")
 end
 
 function M.check_plugin_status()
@@ -47,6 +46,11 @@ function M.check_plugin_status()
   }
   
   print("🔍 Checking plugin installation status...")
+  
+  if vim.fn.isdirectory(lazy_dir) == 0 then
+    print("❌ Lazy directory doesn't exist - plugins not installed")
+    return
+  end
   
   for _, plugin in ipairs(plugins_to_check) do
     local plugin_path = lazy_dir .. "/" .. plugin
@@ -78,6 +82,18 @@ function M.force_reinstall()
   require("lazy").sync({ wait = true })
   
   print("✅ Force reinstall initiated!")
+end
+
+function M.remove_treesitter_parsers()
+  print("🗑️  Removing all treesitter parsers...")
+  
+  local parsers_dir = vim.fn.stdpath("data") .. "/nvim-treesitter"
+  if vim.fn.isdirectory(parsers_dir) == 1 then
+    vim.fn.delete(parsers_dir, "rf")
+    print("✅ Removed treesitter parsers directory")
+  else
+    print("ℹ️  Treesitter parsers directory not found")
+  end
 end
 
 return M 
