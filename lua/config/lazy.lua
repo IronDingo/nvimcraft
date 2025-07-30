@@ -1,8 +1,8 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  -- bootstrap lazy.nvim
+  -- bootstrap lazy.nvim with better timeout handling
   -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "--depth=1", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
@@ -21,6 +21,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins
     { import = "plugins" },
+    -- import core fixes for problematic plugins
+    { import = "plugins.core-fixes" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -31,8 +33,16 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = { enabled = true }, -- automatically check for plugin updates
+  install = { 
+    colorscheme = { "tokyonight", "habamax" },
+    -- Add retry logic for failed installations
+    missing = true,
+  },
+  checker = { 
+    enabled = true,
+    -- Add timeout for checker operations
+    timeout = 30000,
+  }, -- automatically check for plugin updates
   performance = {
     rtp = {
       -- disable some rtp plugins
@@ -46,6 +56,35 @@ require("lazy").setup({
         "tutor",
         "zipPlugin",
       },
+    },
+  },
+  -- Add git configuration to handle timeouts better
+  git = {
+    -- Increase timeout for git operations
+    timeout = 300,
+    -- Use shallow clones to speed up installation
+    depth = 1,
+    -- Retry failed git operations
+    retries = 3,
+  },
+  -- Add ui configuration for better feedback
+  ui = {
+    -- Show installation progress
+    border = "rounded",
+    -- Show more detailed information
+    icons = {
+      cmd = "⌘",
+      config = "🛠",
+      event = "📅",
+      ft = "📂",
+      init = "⚙",
+      keys = "🗝",
+      plugin = "🔌",
+      runtime = "💻",
+      source = "📄",
+      start = "🚀",
+      task = "📋",
+      lazy = "💤 ",
     },
   },
 })
