@@ -39,9 +39,10 @@ require("lazy").setup({
     missing = true,
   },
   checker = { 
-    enabled = true,
+    enabled = false,
     -- Add timeout for checker operations
-    timeout = 30000,
+    -- timeout = 30000,
+    notify = false, -- Disable update notifications
   }, -- automatically check for plugin updates
   performance = {
     rtp = {
